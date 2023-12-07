@@ -17,10 +17,12 @@ const CarCard = ({ closeModal, carId }) => {
   return (
     <>
       {!car ? (
-        <p>Loading...</p>
+        <p>Loading...</p> //here will be loader from some library
       ) : (
-        <div>
-          <button onClick={closeModal}>Close</button>
+        <div className="">
+          <button className="" onClick={closeModal}>
+            Close
+          </button>
           <div>
             <img
               src={

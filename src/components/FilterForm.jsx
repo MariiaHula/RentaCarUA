@@ -58,7 +58,7 @@ const FilterForm = () => {
   };
 
   return (
-    <div>
+    <>
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="cars">Car brand:</label>
@@ -91,6 +91,8 @@ const FilterForm = () => {
             id="from"
             value={fromValue}
             onChange={handleFromChange}
+            placeholder="From"
+            autoComplete="off"
           />
           <label htmlFor="to">To:</label>
           <input
@@ -99,11 +101,13 @@ const FilterForm = () => {
             id="to"
             value={toValue}
             onChange={handleToChange}
+            placeholder="To"
+            autoComplete="off"
           />
           <button type="submit">Search</button>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 
