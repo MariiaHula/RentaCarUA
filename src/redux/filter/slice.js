@@ -14,19 +14,15 @@ const slice = createSlice({
   initialState,
   reducers: {
     setCarBrand: (state, { payload }) => {
-      console.log(payload);
       state.filter.carBrand = payload;
     },
     setPriceOneOur: (state, { payload }) => {
-      console.log(payload);
       state.filter.priceOneOur = payload;
     },
     setFrom: (state, { payload }) => {
-      console.log(payload);
       state.filter.from = payload;
     },
     setTo: (state, { payload }) => {
-      console.log(payload);
       state.filter.to = payload;
     },
   },

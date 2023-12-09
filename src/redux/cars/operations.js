@@ -20,26 +20,15 @@ export const fetchDataThunk = createAsyncThunk(
 
 export const paginationFilteredDataThunk = createAsyncThunk(
   'paginationFilteredData',
-  async ({ carBrand, currentPage }, thunkApi) => {
+  async ({ currentPage }, thunkApi) => {
     try {
-      if (carBrand) {
-        const { data } = await axios.get('advert', {
-          params: {
-            make: carBrand,
-            page: currentPage,
-            limit: 12,
-          },
-        });
-        return data;
-      } else {
-        const { data } = await axios.get('advert', {
-          params: {
-            page: currentPage,
-            limit: 12,
-          },
-        });
-        return data;
-      }
+      const { data } = await axios.get('advert', {
+        params: {
+          page: currentPage,
+          limit: 12,
+        },
+      });
+      return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

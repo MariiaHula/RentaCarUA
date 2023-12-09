@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 export const selectAllCars = state => state.cars.cars.allCars;
 export const selectFilteredCars = state => state.cars.cars.filteredCars;
 
@@ -8,3 +10,28 @@ export const selectFavorites = state => state.cars.favorites;
 export const selectOneCar = state => state.cars.oneCar;
 
 export const selectFilter = state => state.filter.filter;
+
+export const selectFilteredByAllParams = createSelector(
+  [selectAllCars, selectFilter],
+  (cars, filter) => {
+    if (Object.keys(filter).length === 0 && filter.constructor === Object) {
+      return cars;
+    } else {
+      return cars.filter(car => {
+        const mileageInRange =
+          !filter.from ||
+          !filter.to ||
+          (car.mileage >= filter.from && car.mileage <= filter.to);
+
+        const rentalPriceValid =
+          !filter.priceOneOur ||
+          parseFloat(car.rentalPrice.replace('$', '')) <= filter.priceOneOur;
+
+        const carBrandMatches =
+          !filter.carBrand || car.make === filter.carBrand;
+
+        return mileageInRange && rentalPriceValid && carBrandMatches;
+      });
+    }
+  }
+);

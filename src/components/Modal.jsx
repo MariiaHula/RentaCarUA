@@ -29,11 +29,9 @@ const Modal = ({ children, closeModal }) => {
   return ReactDOM.createPortal(
     <div
       onClick={handleModalClose}
-      className="fixed inset-0 flex items-center justify-center backdrop-blur-md bg-opacity-50"
+      className="fixed inset-0 flex items-center justify-center bg-[#12141780] bg-opacity-50"
     >
-      <div className="bg-white p-6 rounded-md max-w-md w-full m-4 relative z-10">
-        {children}
-      </div>
+      <div>{children}</div>
     </div>,
     rootModal
   );
