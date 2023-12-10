@@ -5,6 +5,7 @@ import { fetchCarByIdThunk } from '../redux/cars/operations';
 import { selectOneCar } from '../redux/cars/selectors';
 import Close from '../assests/svg/close.svg?react';
 import Line from '../assests/svg/line.svg?react';
+import { MutatingDots } from 'react-loader-spinner';
 
 const CarCard = ({ closeModal, carId }) => {
   const [height, setHeight] = useState(window.innerHeight);
@@ -32,7 +33,17 @@ const CarCard = ({ closeModal, carId }) => {
   return (
     <>
       {!car ? (
-        <p>Loading...</p>
+        <MutatingDots
+          height="100"
+          width="100"
+          color="#3470ff"
+          secondaryColor="#3470ff"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
       ) : (
         <div
           className={`bg-[#ffffff] flex flex-col max-w-[541px] p-[36px] rounded-[14px] relative select ${

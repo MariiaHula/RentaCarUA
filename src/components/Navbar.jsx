@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import logo from '../assests/svg/wheel.svg';
+import Logo from '../assests/svg/wheel.svg?react';
 
 const Navbar = () => {
   return (
@@ -8,7 +8,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 w-full px-[120px] max-w-[1440px]">
           <div className="flex-shrink-0">
             <NavLink to="/" className="flex items-center text-white">
-              <img src={logo} alt="RentaCarUa" className="block h-8 w-auto" />
+              <div className="block h-8 w-auto">
+                <Logo />
+              </div>
+              {/* <img
+                src={<Logo />}
+                alt="RentaCarUa"
+                className="block h-8 w-auto"
+              /> */}
               <span className="ml-2 text-lg font-semibold font-manrope">
                 RentaCarUa
               </span>
