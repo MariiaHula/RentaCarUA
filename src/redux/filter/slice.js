@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const toInt = stringValue => {
+  let intValue = 0;
+  if (Number(stringValue)) {
+    intValue = parseInt(stringValue);
+  }
+  return intValue;
+};
+
 const initialState = {
   filter: {
     carBrand: '',
@@ -20,10 +28,10 @@ const slice = createSlice({
       state.filter.priceOneOur = payload;
     },
     setFrom: (state, { payload }) => {
-      state.filter.from = payload;
+      state.filter.from = toInt(payload);
     },
     setTo: (state, { payload }) => {
-      state.filter.to = payload;
+      state.filter.to = toInt(payload);
     },
   },
 });

@@ -6,6 +6,7 @@ import {
   setFrom,
   setPriceOneOur,
   setTo,
+  toInt,
 } from '../redux/filter/slice';
 import { fetchDataThunk } from '../redux/cars/operations';
 import { selectAllCars } from '../redux/cars/selectors';
@@ -15,8 +16,6 @@ import Arrow from '../assests/svg/arrow.svg?react';
 const FilterForm = () => {
   const [selectedCar, setSelectedCar] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
-  const [isFromSpanVisible, setIsFromSpanVisible] = useState(true);
-  const [isToSpanVisible, setIsToSpanVisible] = useState(true);
   const [fromValue, setFromValue] = useState('');
   const [toValue, setToValue] = useState('');
   const [isArrowRotatedCar, setIsArrowRotatedCar] = useState(false);
@@ -46,22 +45,23 @@ const FilterForm = () => {
   };
 
   const handleFromChange = e => {
-    const value = e.target.value;
-    if (parseInt(value) >= 0) {
-      setFromValue(parseInt(value));
+    const stringValue = e.target.value;
+    const intValue = toInt(stringValue);
+    if (intValue >= 0) {
+      setFromValue(stringValue);
     }
   };
 
   const handleToChange = e => {
-    const value = e.target.value;
-    if (parseInt(value) >= 0 || value >= parseInt(fromValue)) {
-      setToValue(parseInt(value));
+    const stringValue = e.target.value;
+    const intValue = toInt(stringValue);
+    const intFromValue = toInt(fromValue);
+    if (intValue >= 0 || intValue >= intFromValue) {
+      setToValue(stringValue);
     }
   };
 
   const handleSubmit = e => {
-    setIsFromSpanVisible(true);
-    setIsToSpanVisible(true);
     e.preventDefault();
     dispatch(setCarBrand(selectedCar));
     dispatch(setPriceOneOur(selectedPrice));
@@ -79,131 +79,126 @@ const FilterForm = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-full mb-[50px]">
-        <form onSubmit={handleSubmit} className=" mt-16 flex">
-          <div className="flex items-end gap-[18px]">
-            <div className="brand gap-2 flex-col items-start p-0 flex">
-              <span className="relative text-sm font-medium text-[#8a8a89] [font-family:'Manrope-Regular',Helvetica] text-left leading-[18px]">
-                Car brand
-              </span>
-              <div className="relative">
+      <section>
+        <div className="flex justify-center items-center h-full mb-[50px] w-full px-[120px] max-w-[1440px]">
+          <form onSubmit={handleSubmit} className=" mt-16 flex">
+            <div className="flex items-end gap-[18px]">
+              <div className="brand gap-2 flex-col items-start p-0 flex">
+                <span className="relative text-sm font-medium text-[#8a8a89] [font-family:'Manrope-Regular',Helvetica] text-left leading-[18px]">
+                  Car brand
+                </span>
                 <div className="relative">
-                  <div
-                    className="gap-8 flex-row w-[224px] h-[48px] items-start bg-[#f7f7fb] px-[18px] py-3.5 rounded-[14px] flex [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] "
-                    onClick={() => setIsArrowRotatedCar(!isArrowRotatedCar)}
-                  >
-                    {selectedCar ? selectedCar : 'Enter the text'}
-                    <span
-                      className={`absolute right-[18px] top-[12px] ${
-                        isArrowRotatedCar ? 'rotate-180' : ''
-                      }`}
+                  <div className="relative">
+                    <div
+                      className="gap-8 flex-row w-[224px] h-[48px] items-start bg-[#f7f7fb] px-[18px] py-3.5 rounded-[14px] flex [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] "
+                      onClick={() => setIsArrowRotatedCar(!isArrowRotatedCar)}
                     >
-                      <Arrow className="w-[24px] h-[24px]" />
-                    </span>
+                      {selectedCar ? selectedCar : 'Enter the text'}
+                      <span
+                        className={`absolute right-[18px] top-[12px] ${
+                          isArrowRotatedCar ? 'rotate-180' : ''
+                        }`}
+                      >
+                        <Arrow className="w-[24px] h-[24px]" />
+                      </span>
+                    </div>
+                    {isArrowRotatedCar && (
+                      <ul className="z-10 select overflow-y-auto overflow-x-hidden absolute px-[18px] py-[14px] bg-white w-[224px] max-h-[272px] rounded-[14px] overflow-hidden border border-solid border-[#1214170d]">
+                        {makeArray?.map((make, index) => (
+                          <li
+                            key={index}
+                            onClick={() => handleCarChange(make)}
+                            className="[font-family:'Manrope-Medium',Helvetica] text-[16px] text-[#12141733] "
+                          >
+                            {make}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  {isArrowRotatedCar && (
-                    <ul className="z-10 select overflow-y-auto overflow-x-hidden absolute px-[18px] py-[14px] bg-white w-[224px] max-h-[272px] rounded-[14px] overflow-hidden border border-solid border-[#1214170d]">
-                      {makeArray?.map((make, index) => (
-                        <li
-                          key={index}
-                          onClick={() => handleCarChange(make)}
-                          className="[font-family:'Manrope-Medium',Helvetica] text-[16px] text-[#12141733] "
-                        >
-                          {make}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
               </div>
-            </div>
-            <div className="brand gap-2 flex-col items-start p-0 flex">
-              <span className="price1Hour text-sm font-medium text-[#8a8a89] text-left leading-[18px] [font-family:'Manrope-Regular',Helvetica]">
-                Price/ 1 hour
-              </span>
-              <div className="relative">
-                <div className="select-container">
-                  <div
-                    className="gap-8 flex-row flex-nowrap w-[125px] h-[48px] items-start bg-[#f7f7fb] px-[18px] py-3.5 rounded-[14px] flex [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] "
-                    onClick={() => setIsArrowRotatedTo(!isArrowRotatedTo)}
-                  >
-                    {selectedPrice ? selectedPrice : 'To $'}
-                    <span
-                      className={`absolute right-[18px] top-[12px] ${
-                        isArrowRotatedTo ? 'rotate-180' : ''
-                      }`}
+              <div className="brand gap-2 flex-col items-start p-0 flex">
+                <span className="price1Hour text-sm font-medium text-[#8a8a89] text-left leading-[18px] [font-family:'Manrope-Regular',Helvetica]">
+                  Price/ 1 hour
+                </span>
+                <div className="relative">
+                  <div className="select-container">
+                    <div
+                      className="gap-8 flex-row flex-nowrap w-[125px] h-[48px] items-start bg-[#f7f7fb] px-[18px] py-3.5 rounded-[14px] flex [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] "
+                      onClick={() => setIsArrowRotatedTo(!isArrowRotatedTo)}
                     >
-                      <Arrow className="w-[24px] h-[24px]" />
-                    </span>
+                      {selectedPrice ? selectedPrice : 'To $'}
+                      <span
+                        className={`absolute right-[18px] top-[12px] ${
+                          isArrowRotatedTo ? 'rotate-180' : ''
+                        }`}
+                      >
+                        <Arrow className="w-[24px] h-[24px]" />
+                      </span>
+                    </div>
+                    {isArrowRotatedTo && (
+                      <ul className="z-10 select overflow-y-auto overflow-x-hidden absolute px-[18px] py-[14px] bg-white w-[125px] max-h-[188px] rounded-[14px] overflow-hidden border border-solid border-[#1214170d]">
+                        {priceArray?.map((price, index) => (
+                          <li
+                            key={index}
+                            onClick={() => handlePriceChange(price)}
+                            className="[font-family:'Manrope-Medium',Helvetica] text-[16px] text-[#12141733] "
+                          >
+                            {price}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  {isArrowRotatedTo && (
-                    <ul className="z-10 select overflow-y-auto overflow-x-hidden absolute px-[18px] py-[14px] bg-white w-[125px] max-h-[188px] rounded-[14px] overflow-hidden border border-solid border-[#1214170d]">
-                      {priceArray?.map((price, index) => (
-                        <li
-                          key={index}
-                          onClick={() => handlePriceChange(price)}
-                          className="[font-family:'Manrope-Medium',Helvetica] text-[16px] text-[#12141733] "
-                        >
-                          {price}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
               </div>
-            </div>
-            <div className=" gap-2 flex-col items-start p-0 flex">
-              <label
-                htmlFor="mileage"
-                className="price1Hour text-sm font-medium text-[#8a8a89] [font-family:'Manrope-Regular',Helvetica] text-left leading-[18px]"
-              >
-                Сar mileage / km
-              </label>
-              <div className="flex flex-row relative">
-                <input
-                  className=" gap-8 flex-row max-w-[160px] h-[48px] items-start bg-[#f7f7fb] px-[18px] py-3.5 rounded-l-[14px] flex border-r-[1px]"
-                  name="from"
-                  id="mileage"
-                  value={fromValue}
-                  onChange={handleFromChange}
-                  autoComplete="off"
-                  type="text"
-                  onFocus={() => setIsFromSpanVisible(false)}
-                  onBlur={() => setIsFromSpanVisible(!fromValue)}
-                />
-                {isFromSpanVisible && (
+              <div className=" gap-2 flex-col items-start p-0 flex">
+                <label
+                  htmlFor="mileage"
+                  className="price1Hour text-sm font-medium text-[#8a8a89] [font-family:'Manrope-Regular',Helvetica] text-left leading-[18px]"
+                >
+                  Сar mileage / km
+                </label>
+                <div className="flex flex-row relative">
+                  <input
+                    className=" gap-8 flex-row max-w-[160px] h-[48px] items-start bg-[#f7f7fb] pl-[75px] py-3.5 rounded-l-[14px] flex border-r-[1px]"
+                    name="from"
+                    id="mileage"
+                    value={fromValue}
+                    onChange={handleFromChange}
+                    autoComplete="off"
+                  />
+
                   <span className="left-[24px] top-[12px] absolute [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] ">
                     From
                   </span>
-                )}
-                <input
-                  className="gap-8 flex-row max-w-[160px] h-[48px] items-start bg-[#f7f7fb]  px-[18px] py-3.5 rounded-r-[14px] flex"
-                  name="to"
-                  value={toValue}
-                  onChange={handleToChange}
-                  autoComplete="off"
-                  type="text"
-                  onFocus={() => setIsToSpanVisible(false)}
-                  onBlur={() => setIsToSpanVisible(!toValue)}
-                />
-                {isToSpanVisible && (
+
+                  <input
+                    className="gap-8 flex-row max-w-[160px] h-[48px] items-start bg-[#f7f7fb]  pl-[75px] py-3.5 rounded-r-[14px] flex"
+                    name="to"
+                    value={toValue}
+                    onChange={handleToChange}
+                    autoComplete="off"
+                  />
+
                   <span className="right-[115px] top-[12px] absolute [font-family:'Manrope-Medium',Helvetica] text-[#121417] text-[18px] ">
                     To
                   </span>
-                )}
+                </div>
               </div>
+              <button
+                type="submit"
+                className="gap-0 flex-row justify-center items-center h-[48px] bg-[#3470ff] hover:bg-[#0B44CD] focus:bg-[#0B44CD] transition duration-300 ease-in-out px-11 py-3.5 rounded-xl flex "
+              >
+                <div className="w-fit mt-[-1,00px] text-white text-[14px] tracking-[0] leading-5 [font-family:'Manrope-SemiBold', Helvetica] whitespace-nowrap">
+                  Search
+                </div>
+              </button>
             </div>
-            <button
-              type="submit"
-              className="gap-0 flex-row justify-center items-center h-[48px] bg-[#3470ff] px-11 py-3.5 rounded-xl flex "
-            >
-              <div className="w-fit mt-[-1,00px] text-white text-[14px] tracking-[0] leading-5 [font-family:'Manrope-SemiBold', Helvetica] whitespace-nowrap">
-                Search
-              </div>
-            </button>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      </section>
     </>
   );
 };

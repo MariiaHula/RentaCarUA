@@ -38,7 +38,7 @@ const CarCard = ({ closeModal, carId }) => {
           className={`bg-[#ffffff] flex flex-col max-w-[541px] p-[36px] rounded-[14px] relative select ${
             height < 752
               ? 'overflow-y-auto max-h-[600px]'
-              : 'overflow-hidden max-h-[752px]'
+              : 'overflow-hidden max-h-[780px]'
           } `}
         >
           <div className="">
@@ -69,36 +69,36 @@ const CarCard = ({ closeModal, carId }) => {
                 </p>
                 <div className="flex flex-col w-[277px] h-[40px] items-start gap-[4px] ">
                   <div className="inline-flex items-center justify-center gap-[6px]  flex-[0_0_auto]">
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       {car.address.split(',')[1].trim()}
-                    </div>
+                    </p>
                     <Line />
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       Ukraine
-                    </div>
+                    </p>
                     <Line />
 
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       Id: {carId}
-                    </div>
+                    </p>
                     <Line />
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       Year: {car.year}
-                    </div>
+                    </p>
                     <Line />
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       Type: {car.type}
-                    </div>
+                    </p>
                   </div>
                   <div className="inline-flex items-center justify-center gap-[6px]  flex-[0_0_auto]">
-                    <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                    <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                       Fuel Consumption: {car.fuelConsumption}
-                    </div>
+                    </p>
                     <Line />
                     <div className="flex w-[110px] items-baseline gap-[6px] ">
-                      <div className=" w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                      <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                         Engine Size: {car.engineSize}
-                      </div>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -115,9 +115,9 @@ const CarCard = ({ closeModal, carId }) => {
                 <ul className="flex flex-wrap items-center gap-[6px]">
                   {car.accessories.map((item, index) => (
                     <li key={index} className="flex items-center gap-[6px]">
-                      <div className="w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                      <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                         {item}
-                      </div>
+                      </p>
                       {index !== car.accessories.length - 1 && <Line />}
                     </li>
                   ))}
@@ -125,9 +125,9 @@ const CarCard = ({ closeModal, carId }) => {
                 <ul className="flex flex-wrap items-center gap-[6px]">
                   {car.functionalities.map((item, index) => (
                     <li key={index} className="flex items-center gap-[6px]">
-                      <div className="w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
+                      <p className="break-words w-fit mt-[-1.00px] [font-family:'Manrope-Regular',Helvetica] font-normal text-[#12141780] text-[12px] tracking-[0] leading-[18px] whitespace-nowrap">
                         {item}
-                      </div>
+                      </p>
                       {index !== car.functionalities.length - 1 && <Line />}
                     </li>
                   ))}
@@ -197,7 +197,7 @@ const CarCard = ({ closeModal, carId }) => {
           <div className="max-w-[168px]">
             <a
               href="tel:+380730000000"
-              className="inline-block items-center justify-center px-[50px] py-[12px] bg-[#3470ff] rounded-[12px] text-white text-[14px] font-semibold tracking-[0] leading-[20px] whitespace-nowrap"
+              className="inline-block items-center justify-center px-[50px] py-[12px] bg-[#3470ff] hover:bg-[#0B44CD] focus:bg-[#0B44CD] transition duration-300 ease-in-out rounded-[12px] text-white text-[14px] font-semibold tracking-[0] leading-[20px] whitespace-nowrap"
             >
               <span className="font-semibold text-white text-[14px] tracking-[0] leading-[20px] whitespace-nowrap">
                 Rental car
