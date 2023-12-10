@@ -187,8 +187,7 @@ const CarPreviewList = () => {
             !carBrand &&
             !priceOneOur &&
             !from &&
-            !to &&
-            isLoading && (
+            !to && (
               <button
                 onClick={handleLoadMoreCkick}
                 disabled={isLoading}
