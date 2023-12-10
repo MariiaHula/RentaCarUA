@@ -18,7 +18,6 @@ import { useLocation } from 'react-router-dom';
 import Line from '../assests/svg/line.svg?react';
 import WhiteHeart from '../assests/svg/whiteHeart.svg?react';
 import BlueHeart from '../assests/svg/blueHeart.svg?react';
-import { MutatingDots } from 'react-loader-spinner';
 
 const CarPreviewList = () => {
   const location = useLocation();
