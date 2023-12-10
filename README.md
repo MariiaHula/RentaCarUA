@@ -64,6 +64,4 @@ How to Use
 - If you have any questions or issues, please contact us at
   support@rentalcarua.com.
 
-## License
-
-This application is distributed without a license.
+## License This application is distributed without a license.
