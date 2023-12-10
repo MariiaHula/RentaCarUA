@@ -82,7 +82,7 @@ const CarPreviewList = () => {
       <section>
         <div className="flex flex-col items-center w-full px-[120px] max-w-[1440px]">
           {allCarsData.length === 0 ? (
-            <p className=" text-[#3470ff] w-fit mt-[-1.00px] [font-family:'Manrope-Medium',Helvetica] font-medium text-transparent text-[28px] tracking-[0] leading-[24px] whitespace-nowrap">
+            <p className=" text-[#3470ff] w-fit mt-[-1.00px] [font-family:'Manrope-Medium',Helvetica] font-medium text-[28px] tracking-[0] leading-[24px] whitespace-nowrap">
               Sorry, no matches
             </p>
           ) : (
@@ -187,7 +187,8 @@ const CarPreviewList = () => {
             !carBrand &&
             !priceOneOur &&
             !from &&
-            !to && (
+            !to &&
+            isLoading && (
               <button
                 onClick={handleLoadMoreCkick}
                 disabled={isLoading}
