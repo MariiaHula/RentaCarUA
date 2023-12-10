@@ -112,7 +112,7 @@ const CarPreviewList = () => {
                         src={
                           car.img
                             ? `${car.img}`
-                            : 'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-1.jpg'
+                            : 'https://easydrawingguides.com/wp-content/uploads/2017/02/how-to-draw-a-cartoon-car-featured-image-1200.png'
                         }
                         alt={car.make}
                       />
