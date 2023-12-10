@@ -191,7 +191,7 @@ const CarPreviewList = () => {
               <button
                 onClick={handleLoadMoreCkick}
                 disabled={isLoading}
-                className={`mb-[100px] text-[16px] [font-family:'Montserrat-Medium',Helvetica] text-[#3470ff] hover:text-[#0B44CD] focus:text-[#0B44CD] transition duration-300 ease-in-out  ${
+                className={`mb-[60px] text-[16px] [font-family:'Montserrat-Medium',Helvetica] text-[#3470ff] hover:text-[#0B44CD] focus:text-[#0B44CD] transition duration-300 ease-in-out  ${
                   location.pathname !== '/catalog' ? 'hidden' : null
                 }`}
               >
