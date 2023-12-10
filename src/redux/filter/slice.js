@@ -12,8 +12,8 @@ const initialState = {
   filter: {
     carBrand: '',
     priceOneOur: '',
-    from: null,
-    to: null,
+    from: 0,
+    to: 0,
   },
 };
 

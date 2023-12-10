@@ -19,10 +19,12 @@ export const selectFilteredByAllParams = createSelector(
     } else {
       return cars.filter(car => {
         const mileageInRange =
-          !filter.from ||
-          !filter.to ||
-          (car.mileage >= filter.from && car.mileage <= filter.to);
+          (car.mileage >= filter.from || filter.from === 0) &&
+          (car.mileage <= filter.to || filter.to === 0);
 
+        console.log(filter.from);
+        console.log(filter.to);
+        console.log(mileageInRange);
         const rentalPriceValid =
           !filter.priceOneOur ||
           parseFloat(car.rentalPrice.replace('$', '')) <= filter.priceOneOur;
